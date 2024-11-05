@@ -1,39 +1,27 @@
 package com.example.rafflesystemapi.Raffle;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RaffleService {
+    private final RaffleRepository raffleRepository;
+
+    @Autowired
+    public RaffleService(RaffleRepository raffleRepository) {
+        this.raffleRepository = raffleRepository;
+    }
     public List<Raffle> getAllRaffles() {
-        List<Raffle> raffles = new ArrayList<>();
+        return this.raffleRepository.findAll();
+    }
 
-        raffles.add(new Raffle(
-                "Sample Raffle",
-                "Test raffle description",
-                "360-degree Camera",
-                BigDecimal.valueOf(18.23),
-                LocalDateTime.now().plusDays(5), // Example end date
-                LocalDateTime.now(), // Example start date
-                "in progress",
-                null // Assuming no winner initially
-        ));
-
-        raffles.add(new Raffle(
-                "Second Raffle",
-                "Another raffle description",
-                "Smartphone",
-                BigDecimal.valueOf(25.50),
-                LocalDateTime.now().plusDays(10),
-                LocalDateTime.now().plusDays(2),
-                "upcoming",
-                null
-        ));
-
-        return raffles;
+    public void newRaffle(Raffle raffle) {
+        Optional<Raffle> res = raffleRepository.findRaffleByName(raffle.getName());
+        if(res.isPresent()) {
+            throw new IllegalStateException("Raffle with a same name already exists");
+        }
+        raffleRepository.save(raffle);
     }
 }

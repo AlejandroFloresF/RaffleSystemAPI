@@ -3,7 +3,9 @@ package com.example.rafflesystemapi.Raffle;
 import com.example.rafflesystemapi.User.User;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 
 @Entity
 @Table(name = "raffles")
@@ -12,7 +14,7 @@ public class Raffle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Column(unique = true, nullable = false)
     private String name;
     private String description;
     private String prize;
@@ -25,6 +27,9 @@ public class Raffle {
 
     @Column(name = "end_date")
     private LocalDateTime endDate;
+
+    @Transient
+    private int antiquity;
 
     private String status;
 
@@ -128,5 +133,13 @@ public class Raffle {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setAntiquity(int antiquity) {
+        this.antiquity = antiquity;
+    }
+
+    public int getAntiquity() {
+        return Period.between(this.endDate.toLocalDate(), LocalDate.now()).getYears();
     }
 }
