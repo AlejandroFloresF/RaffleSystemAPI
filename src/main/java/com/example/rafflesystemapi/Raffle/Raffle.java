@@ -18,21 +18,15 @@ public class Raffle {
     private String name;
     private String description;
     private String prize;
-
     @Column(name = "ticket_cost")
     private BigDecimal ticketCost;
-
     @Column(name = "start_date")
     private LocalDateTime startDate;
-
     @Column(name = "end_date")
     private LocalDateTime endDate;
-
     @Transient
     private int antiquity;
-
     private String status;
-
     @ManyToOne
     @JoinColumn(name = "winner_id")
     private User winner;
