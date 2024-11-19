@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -68,4 +70,12 @@ public class RaffleService {
                 HttpStatus.ACCEPTED
         );
     }
+
+    public void saveBackgroundImage(Long id, MultipartFile file) throws IOException {
+        Raffle raffle = raffleRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Raffle not found with ID: " + id));
+        raffle.setBackgroundImage(file.getBytes());
+        raffleRepository.save(raffle);
+    }
+
+
 }

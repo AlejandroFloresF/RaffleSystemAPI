@@ -24,6 +24,9 @@ public class Raffle {
     private LocalDateTime startDate;
     @Column(name = "end_date")
     private LocalDateTime endDate;
+    @Lob
+    @Column(name = "background_image")
+    private byte[] backgroundImage;
     @Transient
     private int antiquity;
     private String status;
@@ -34,9 +37,10 @@ public class Raffle {
     public Raffle() {
     }
 
-    public Raffle(Long id, User winner, String status, LocalDateTime endDate, LocalDateTime startDate, BigDecimal ticketCost, String prize, String description, String name) {
+    public Raffle(Long id, byte[] backgroundImage, User winner, String status, LocalDateTime endDate, LocalDateTime startDate, BigDecimal ticketCost, String prize, String description, String name) {
         this.id = id;
         this.winner = winner;
+        this.backgroundImage = backgroundImage;
         this.status = status;
         this.endDate = endDate;
         this.startDate = startDate;
@@ -46,8 +50,9 @@ public class Raffle {
         this.name = name;
     }
 
-    public Raffle(String name, String description, String prize, BigDecimal ticketCost, LocalDateTime endDate, LocalDateTime startDate, String status, User winner) {
+    public Raffle(String name, byte[] backgroundImage, String description, String prize, BigDecimal ticketCost, LocalDateTime endDate, LocalDateTime startDate, String status, User winner) {
         this.name = name;
+        this.backgroundImage = backgroundImage;
         this.description = description;
         this.prize = prize;
         this.ticketCost = ticketCost;
@@ -63,6 +68,14 @@ public class Raffle {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public byte[] getBackgroundImage() {
+        return backgroundImage;
+    }
+
+    public void setBackgroundImage(byte[] backgroundImage) {
+        this.backgroundImage = backgroundImage;
     }
 
     public User getWinner() {
