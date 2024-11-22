@@ -16,7 +16,7 @@ public class TicketController {
     }
 
     @GetMapping
-    public List<Ticket> getAllRaffles() {
+    public List<Ticket> getAllTickets() {
         return ticketService.getAllTickets();
     }
 

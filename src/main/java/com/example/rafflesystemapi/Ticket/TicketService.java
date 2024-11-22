@@ -1,5 +1,6 @@
 package com.example.rafflesystemapi.Ticket;
 
+import com.example.rafflesystemapi.Raffle.RaffleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ public class TicketService {
     public TicketService(TicketRepository ticketRepository) {
         this.ticketRepository = ticketRepository;
     }
+
     public List<Ticket> getAllTickets() {
         return this.ticketRepository.findAll();
     }
@@ -67,7 +69,6 @@ public class TicketService {
                 HttpStatus.ACCEPTED
         );
     }
-
 }
 
 

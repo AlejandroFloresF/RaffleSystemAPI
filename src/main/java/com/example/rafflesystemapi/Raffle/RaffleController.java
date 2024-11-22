@@ -40,6 +40,7 @@
         public ResponseEntity<Object> deleteRaffle(@PathVariable("raffleId") Long id) {
             return this.raffleService.deleteRaffle(id);
         }
+
         @PostMapping("/uploadBackgroundImage/{id}")
         public ResponseEntity<String> uploadImage(
                 @PathVariable("id") Long id,
@@ -54,4 +55,10 @@
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Raffle not found with ID: " + id);
             }
         }
+
+        @GetMapping("/available-tickets/{raffleId}")
+        public List<Integer> getAvailableTickets(@PathVariable("raffleId") Long raffleId) {
+            return raffleService.getAvailableTickets(raffleId);
+        }
+
     }

@@ -20,6 +20,8 @@ public class Raffle {
     private String prize;
     @Column(name = "ticket_cost")
     private BigDecimal ticketCost;
+    @Column(name = "max_tickets")
+    private Long MaxTickets;
     @Column(name = "start_date")
     private LocalDateTime startDate;
     @Column(name = "end_date")
@@ -76,6 +78,14 @@ public class Raffle {
 
     public void setBackgroundImage(byte[] backgroundImage) {
         this.backgroundImage = backgroundImage;
+    }
+
+    public long getMaxTickets() {
+        return MaxTickets;
+    }
+
+    public void setMaxTickets(Long MaxTickets) {
+        this.MaxTickets = MaxTickets;
     }
 
     public User getWinner() {

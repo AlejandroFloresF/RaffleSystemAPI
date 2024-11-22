@@ -1,12 +1,15 @@
 package com.example.rafflesystemapi.Raffle;
 
+import com.example.rafflesystemapi.Ticket.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.support.NullValue;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -16,12 +19,17 @@ public class RaffleService {
 
     HashMap<String, Object> statusMessage;
 
+    @Autowired
     private final RaffleRepository raffleRepository;
+    private final TicketRepository ticketRepository;
 
     @Autowired
-    public RaffleService(RaffleRepository raffleRepository) {
+    public RaffleService(RaffleRepository raffleRepository, TicketRepository ticketRepository) {
         this.raffleRepository = raffleRepository;
+        this.ticketRepository = ticketRepository;
     }
+
+
     public List<Raffle> getAllRaffles() {
         return this.raffleRepository.findAll();
     }
@@ -70,6 +78,29 @@ public class RaffleService {
                 HttpStatus.ACCEPTED
         );
     }
+
+    public List<Integer> getAvailableTickets(Long raffleId) {
+        statusMessage = new HashMap<>();
+        Raffle raffle = raffleRepository.findById(raffleId)
+                .orElseThrow(() -> new RuntimeException("Raffle not found"));
+        if(raffle.getId() == null) {
+            statusMessage.put("Error: ", true);
+            statusMessage.put("message", "Raffle does not exists");
+        }
+        List<Integer> purchasedTickets = ticketRepository.findPurchasedTicketsByRaffleId(raffleId);
+
+        List<Integer> availableTickets = new ArrayList<>();
+        for (int i = 1; i <= raffle.getMaxTickets(); i++) {
+            if (!purchasedTickets.contains(i)) {
+                availableTickets.add(i);
+            }
+        }
+        if(!availableTickets.isEmpty()) {
+            statusMessage.put("Data:", availableTickets);
+        }
+        return availableTickets;
+    }
+
 
     public void saveBackgroundImage(Long id, MultipartFile file) throws IOException {
         Raffle raffle = raffleRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Raffle not found with ID: " + id));
