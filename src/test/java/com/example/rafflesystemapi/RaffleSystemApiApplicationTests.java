@@ -3,7 +3,7 @@ package com.example.rafflesystemapi;
 import com.example.rafflesystemapi.Repository.RaffleRepository;
 import com.example.rafflesystemapi.Service.RaffleService;
 import com.example.rafflesystemapi.ViewModel.Raffle;
-import com.example.rafflesystemapi.exception.RaffleNotFoundException;
+import com.example.rafflesystemapi.Exception.RaffleNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -103,7 +103,7 @@ class RaffleSystemApiApplicationTests {
 	@Test
 	void testGetRaffleById_ThrowsRaffleNotFoundException() {
 		// Arrange
-		Long raffleId = 1L;
+		Long raffleId = 3L;
 		when(raffleRepository.findById(raffleId)).thenReturn(Optional.empty());
 
 		// Act & Assert

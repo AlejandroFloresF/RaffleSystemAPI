@@ -3,7 +3,7 @@ package com.example.rafflesystemapi.Service;
 import com.example.rafflesystemapi.ViewModel.Raffle;
 import com.example.rafflesystemapi.Repository.RaffleRepository;
 import com.example.rafflesystemapi.Repository.TicketRepository;
-import com.example.rafflesystemapi.exception.RaffleNotFoundException;
+import com.example.rafflesystemapi.Exception.RaffleNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

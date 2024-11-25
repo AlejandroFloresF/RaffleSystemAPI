@@ -25,6 +25,12 @@ public class User {
     @Column(name = "is_admin")
     private Boolean isAdmin;
 
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "username")
+    private String username;
+
     @Column(name = "receives_notifications")
     private Boolean receivesNotifications;
     public Long getId() {
@@ -43,6 +49,21 @@ public class User {
         this.receivesNotifications = receivesNotifications;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
     public Boolean getAdmin() {
         return isAdmin;
     }
