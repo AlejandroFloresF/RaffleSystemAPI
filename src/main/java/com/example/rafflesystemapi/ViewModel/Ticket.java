@@ -1,7 +1,5 @@
-package com.example.rafflesystemapi.Ticket;
+package com.example.rafflesystemapi.ViewModel;
 
-import com.example.rafflesystemapi.Raffle.Raffle;
-import com.example.rafflesystemapi.User.User;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -18,7 +16,7 @@ public class Ticket {
     private Raffle raffle;
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private User userVM;
     @Column(name = "reserved_until")
     private LocalDateTime reservedUntil;
     private Boolean paid;
@@ -27,19 +25,19 @@ public class Ticket {
     public Ticket() {
 
     }
-    public Ticket(Long id, Integer number, Raffle raffle, User user, LocalDateTime reservedUntil, Boolean paid) {
+    public Ticket(Long id, Integer number, Raffle raffle, User userVM, LocalDateTime reservedUntil, Boolean paid) {
         this.id = id;
         this.number = number;
         this.raffle = raffle;
-        this.user = user;
+        this.userVM = userVM;
         this.reservedUntil = reservedUntil;
         this.paid = paid;
     }
 
-    public Ticket(Integer number, Raffle raffle, User user, LocalDateTime reservedUntil, Boolean paid) {
+    public Ticket(Integer number, Raffle raffle, User userVM, LocalDateTime reservedUntil, Boolean paid) {
         this.number = number;
         this.raffle = raffle;
-        this.user = user;
+        this.userVM = userVM;
         this.reservedUntil = reservedUntil;
         this.paid = paid;
     }
@@ -68,11 +66,11 @@ public class Ticket {
     }
 
     public User getUser() {
-        return user;
+        return userVM;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(User userVM) {
+        this.userVM = userVM;
     }
 
     public LocalDateTime getReservedUntil() {

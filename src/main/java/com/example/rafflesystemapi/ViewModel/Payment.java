@@ -1,7 +1,5 @@
-package com.example.rafflesystemapi.Payment;
+package com.example.rafflesystemapi.ViewModel;
 
-import com.example.rafflesystemapi.Raffle.Raffle;
-import com.example.rafflesystemapi.User.User;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -16,7 +14,7 @@ public class Payment {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private User userVM;
 
     @ManyToOne
     @JoinColumn(name = "raffle_id", nullable = false)

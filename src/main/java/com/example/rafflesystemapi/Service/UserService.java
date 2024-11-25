@@ -1,5 +1,7 @@
-package com.example.rafflesystemapi.User;
+package com.example.rafflesystemapi.Service;
 
+import com.example.rafflesystemapi.Repository.UserRepository;
+import com.example.rafflesystemapi.ViewModel.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,12 +26,12 @@ public class UserService {
         return this.userRepository.findAll();
     }
 
-    public ResponseEntity<Object> newUser(User user) {
+    public ResponseEntity<Object> newUser(User userVM) {
         statusMessage = new HashMap<>();
-        Optional<User> res = userRepository.findUserByFullName(user.getFullName());
-        statusMessage.put("name", user.getFullName());
+        Optional<User> res = userRepository.findUserByFullName(userVM.getFullName());
+        statusMessage.put("name", userVM.getFullName());
 
-        if(res.isPresent() && user.getId() == null) {
+        if(res.isPresent() && userVM.getId() == null) {
             statusMessage.put("Error: ", true);
             statusMessage.put("message", "User already exists");
             return new ResponseEntity<>(
@@ -38,11 +40,11 @@ public class UserService {
             );
         }
         statusMessage.put("message", "User created successfully");
-        if(user.getId() > 0) {
+        if(userVM.getId() > 0) {
             statusMessage.put("message", "User successfully updated");
         }
-        userRepository.save(user);
-        statusMessage.put("Data: ", user);
+        userRepository.save(userVM);
+        statusMessage.put("Data: ", userVM);
 
         return new ResponseEntity<>(
                 statusMessage,

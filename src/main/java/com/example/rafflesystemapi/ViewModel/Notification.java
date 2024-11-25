@@ -1,7 +1,5 @@
-package com.example.rafflesystemapi.Notification;
+package com.example.rafflesystemapi.ViewModel;
 
-import com.example.rafflesystemapi.Raffle.Raffle;
-import com.example.rafflesystemapi.User.User;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -14,7 +12,7 @@ public class Notification {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private User userVM;
 
     @ManyToOne
     @JoinColumn(name = "raffle_id", nullable = false)

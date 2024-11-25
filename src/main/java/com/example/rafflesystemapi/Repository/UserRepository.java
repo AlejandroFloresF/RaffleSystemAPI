@@ -1,5 +1,6 @@
-package com.example.rafflesystemapi.User;
+package com.example.rafflesystemapi.Repository;
 
+import com.example.rafflesystemapi.ViewModel.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

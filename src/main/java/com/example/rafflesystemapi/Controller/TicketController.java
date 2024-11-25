@@ -1,4 +1,6 @@
-package com.example.rafflesystemapi.Ticket;
+package com.example.rafflesystemapi.Controller;
+import com.example.rafflesystemapi.ViewModel.Ticket;
+import com.example.rafflesystemapi.Service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,13 +23,13 @@ public class TicketController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> addTicket(@RequestBody Ticket ticket) {
-        return this.ticketService.newTicket(ticket);
+    public ResponseEntity<Object> addTicket(@RequestBody Ticket ticketVM) {
+        return this.ticketService.newTicket(ticketVM);
     }
 
     @PutMapping
-    public ResponseEntity<Object> updateTicket(@RequestBody Ticket ticket) {
-        return this.ticketService.newTicket(ticket);
+    public ResponseEntity<Object> updateTicket(@RequestBody Ticket ticketVM) {
+        return this.ticketService.newTicket(ticketVM);
     }
 
     @DeleteMapping(path = "{ticketId}")

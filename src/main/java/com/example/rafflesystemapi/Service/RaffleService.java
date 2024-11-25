@@ -1,8 +1,10 @@
-package com.example.rafflesystemapi.Raffle;
+package com.example.rafflesystemapi.Service;
 
-import com.example.rafflesystemapi.Ticket.TicketRepository;
+import com.example.rafflesystemapi.ViewModel.Raffle;
+import com.example.rafflesystemapi.Repository.RaffleRepository;
+import com.example.rafflesystemapi.Repository.TicketRepository;
+import com.example.rafflesystemapi.exception.RaffleNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.support.NullValue;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -101,6 +103,10 @@ public class RaffleService {
         return availableTickets;
     }
 
+    public Raffle getRaffleById(Long id) {
+        return raffleRepository.findById(id)
+                .orElseThrow(() -> new RaffleNotFoundException("Raffle with ID " + id + " not found"));
+    }
 
     public void saveBackgroundImage(Long id, MultipartFile file) throws IOException {
         Raffle raffle = raffleRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Raffle not found with ID: " + id));

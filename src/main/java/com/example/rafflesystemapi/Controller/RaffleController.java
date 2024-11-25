@@ -1,5 +1,7 @@
-    package com.example.rafflesystemapi.Raffle;
+    package com.example.rafflesystemapi.Controller;
 
+    import com.example.rafflesystemapi.ViewModel.Raffle;
+    import com.example.rafflesystemapi.Service.RaffleService;
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.http.HttpStatus;
     import org.springframework.http.ResponseEntity;

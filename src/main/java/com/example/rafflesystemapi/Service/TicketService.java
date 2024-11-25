@@ -1,6 +1,7 @@
-package com.example.rafflesystemapi.Ticket;
+package com.example.rafflesystemapi.Service;
 
-import com.example.rafflesystemapi.Raffle.RaffleRepository;
+import com.example.rafflesystemapi.Repository.TicketRepository;
+import com.example.rafflesystemapi.ViewModel.Ticket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,12 +26,12 @@ public class TicketService {
         return this.ticketRepository.findAll();
     }
 
-    public ResponseEntity<Object> newTicket(Ticket ticket) {
+    public ResponseEntity<Object> newTicket(Ticket ticketVM) {
         statusMessage = new HashMap<>();
-        Optional<Ticket> res = ticketRepository.findTicketByNumber(ticket.getNumber());
-        statusMessage.put("name", ticket.getNumber());
+        Optional<Ticket> res = ticketRepository.findTicketByNumber(ticketVM.getNumber());
+        statusMessage.put("name", ticketVM.getNumber());
 
-        if(res.isPresent() && ticket.getId() == null) {
+        if(res.isPresent() && ticketVM.getId() == null) {
             statusMessage.put("Error: ", true);
             statusMessage.put("message", "Ticket already exists");
             return new ResponseEntity<>(
@@ -39,11 +40,11 @@ public class TicketService {
             );
         }
         statusMessage.put("message", "Ticket created successfully");
-        if(ticket.getId() > 0) {
+        if(ticketVM.getId() > 0) {
             statusMessage.put("message", "Ticket successfully updated");
         }
-        ticketRepository.save(ticket);
-        statusMessage.put("Data: ", ticket);
+        ticketRepository.save(ticketVM);
+        statusMessage.put("Data: ", ticketVM);
 
         return new ResponseEntity<>(
                 statusMessage,

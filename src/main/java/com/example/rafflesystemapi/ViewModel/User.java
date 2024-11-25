@@ -1,4 +1,4 @@
-package com.example.rafflesystemapi.User;
+package com.example.rafflesystemapi.ViewModel;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;

@@ -1,5 +1,7 @@
-package com.example.rafflesystemapi.User;
+package com.example.rafflesystemapi.Controller;
 
+import com.example.rafflesystemapi.ViewModel.User;
+import com.example.rafflesystemapi.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,13 +27,13 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> addRaffle(@RequestBody User user) {
-        return this.userService.newUser(user);
+    public ResponseEntity<Object> addRaffle(@RequestBody User userVM) {
+        return this.userService.newUser(userVM);
     }
 
     @PutMapping
-    public ResponseEntity<Object> updateRaffle(@RequestBody User user) {
-        return this.userService.newUser(user);
+    public ResponseEntity<Object> updateRaffle(@RequestBody User userVM) {
+        return this.userService.newUser(userVM);
     }
 
     @DeleteMapping(path = "{userId}")

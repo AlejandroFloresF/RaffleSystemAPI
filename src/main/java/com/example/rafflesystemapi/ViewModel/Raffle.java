@@ -1,6 +1,5 @@
-package com.example.rafflesystemapi.Raffle;
+package com.example.rafflesystemapi.ViewModel;
 
-import com.example.rafflesystemapi.User.User;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
