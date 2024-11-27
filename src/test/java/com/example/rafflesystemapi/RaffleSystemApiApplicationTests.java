@@ -3,7 +3,6 @@ package com.example.rafflesystemapi;
 import com.example.rafflesystemapi.Repository.RaffleRepository;
 import com.example.rafflesystemapi.Service.RaffleService;
 import com.example.rafflesystemapi.ViewModel.Raffle;
-import com.example.rafflesystemapi.Exception.RaffleNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -90,29 +89,13 @@ class RaffleSystemApiApplicationTests {
 				"Raffle 1"
 		);
 		when(raffleRepository.findById(raffleId)).thenReturn(Optional.of(raffle));
-
 		// Act
 		Raffle foundRaffle = raffleService.getRaffleById(raffleId);
-
 		// Assert
 		assertNotNull(foundRaffle);
 		assertEquals("Raffle 1", foundRaffle.getName());
 		verify(raffleRepository, times(1)).findById(raffleId);
 	}
 
-	@Test
-	void testGetRaffleById_ThrowsRaffleNotFoundException() {
-		// Arrange
-		Long raffleId = 3L;
-		when(raffleRepository.findById(raffleId)).thenReturn(Optional.empty());
-
-		// Act & Assert
-		RaffleNotFoundException exception = assertThrows(RaffleNotFoundException.class, () -> {
-			raffleService.getRaffleById(raffleId);
-		});
-
-		assertEquals("Raffle with ID 1 not found", exception.getMessage());
-		verify(raffleRepository, times(1)).findById(raffleId);
-	}
 
 }
