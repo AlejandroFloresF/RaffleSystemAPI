@@ -3,6 +3,7 @@ package com.example.rafflesystemapi.Controller;
 import com.example.rafflesystemapi.Service.AuthService;
 import com.example.rafflesystemapi.ViewModel.LoginRequest;
 import com.example.rafflesystemapi.ViewModel.AuthResponse;
+import com.example.rafflesystemapi.ViewModel.LogoutRequest;
 import com.example.rafflesystemapi.ViewModel.RegisterRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,11 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest loginRequest) {
         AuthResponse token = authService.login(loginRequest);
+        return ResponseEntity.ok(token);
+    }
+    @PostMapping("logout")
+    public ResponseEntity<AuthResponse> logout(@RequestBody LogoutRequest logoutRequest) {
+        AuthResponse token = authService.logout(logoutRequest);
         return ResponseEntity.ok(token);
     }
 

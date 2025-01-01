@@ -17,15 +17,16 @@ import java.util.function.Function;
 @Service
 public class JwtService {
     private static final String SECRET_KEY = "312412412341242412312412341231231241123123124122312312312";
-    public String getToken(UserDetails user) {
-        return getToken(new HashMap<>(), user);
+    public String getToken(UserDetails user, Long id) {
+        return getToken(new HashMap<>(), user, id);
     }
 
-    private String getToken(HashMap<String,Object> extraClaims, UserDetails user) {
+    private String getToken(HashMap<String,Object> extraClaims, UserDetails user, Long id) {
         return Jwts
                 .builder()
                 .setClaims(extraClaims)
                 .setSubject(user.getUsername())
+                .setId(id.toString())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60*24))
                 .signWith(getKey(), SignatureAlgorithm.HS256)
